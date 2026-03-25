@@ -2,9 +2,10 @@
 
 #include "cfunctionblock.h"
 #include "cconnection.h"
-#include "csiggen.h"
 
 CFBDBuilder::CFBDBuilder(CContainerFBD* _cont) : FScheme(_cont) {}
+
+// TODO zaimplementować definiowanie konfiguracji z zewnętrznego pliku konfiguracyjnego. Pewnie json.
 
 void CFBDBuilder::configureFBD() {
     CFunctionBlock* fb1 = new CFunctionBlock("FB1", 0, 0.5, 0);
@@ -13,7 +14,7 @@ void CFBDBuilder::configureFBD() {
     FScheme->addFunctionBlock( fb2 );
     CFunctionBlock* fb3 = new CFunctionBlock("FB3", 2, 0, 0);
     FScheme->addFunctionBlock( fb3 );
-    CFunctionBlock* fb4 = new CFunctionBlock("FB4", 2, 0, 10);
+    CFunctionBlock* fb4 = new CFunctionBlock("FB4", 2, 0, 0);
     FScheme->addFunctionBlock( fb4 );
 
     CConnection *con;

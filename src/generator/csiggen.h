@@ -10,7 +10,7 @@
 class CSigGen : public CFunctionBlock
 {
     /** Bool nadawania sygnału */
-    bool Transmitter{false};
+    bool Nadajnik{true};
 
 public:
     /**
@@ -33,14 +33,14 @@ public:
 
         @return true, gdy nadawanie jest włączone
     */
-    bool getTransmitter() const;
+    bool isNadajnik() const;
 
     /**
         Ustawienie trybu nadawania.
 
-        @param _transmitter Nowa wartość trybu nadawania
+        @param _nadajnik Nowa wartość trybu nadawania
     */
-    void setTransmitter(bool _transmitter);
+    void setIsNadajnik(bool _nadajnik);
 
 };
 

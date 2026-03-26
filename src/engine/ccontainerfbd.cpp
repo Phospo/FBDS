@@ -57,3 +57,7 @@ std::size_t CContainerFBD::getFunctionBlockCount() const {
 unsigned CContainerFBD::getSamplingTime() const {
     return FSamplingTime;
 }
+
+void CContainerFBD::setSamplingTime(unsigned _samplingTime) {
+    FSamplingTime = _samplingTime;
+}

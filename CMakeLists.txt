@@ -38,7 +38,7 @@ add_library(FBDSimulatorCore STATIC
     src/generator/csiggen.cpp
     src/generator/cconstval.cpp
     src/generator/cfromcsv.cpp
-    src/generator/cmathfunc.cpp
+    src/generator/csingen.cpp
 )
 
 target_include_directories(FBDSimulatorCore
@@ -61,6 +61,7 @@ add_executable(FBDSimulatorTests
     tests/cfunctionblock_tests.cpp
     tests/csiggen_tests.cpp
     tests/odbiornik_tests.cpp
+    tests/csimengine_tests.cpp
 )
 
 target_link_libraries(FBDSimulatorTests PRIVATE

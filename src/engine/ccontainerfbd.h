@@ -67,6 +67,13 @@ public:
         @return	Czas próbkowania w milisekundach
     */
     unsigned getSamplingTime() const;
+
+    /**
+        Ustawienie czasu próbkowania symulacji.
+
+        @param _samplingTime Czas próbkowania w milisekundach
+    */
+    void setSamplingTime(unsigned _samplingTime);
 };
 
 #endif // CCONTAINERFBD_H

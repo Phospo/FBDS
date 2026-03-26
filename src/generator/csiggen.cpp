@@ -13,3 +13,7 @@ void CSigGen::setIsNadajnik(bool _nadajnik) {
     Nadajnik = _nadajnik;
 }
 
+//0208260326
+//tbh usless nie rozumiem po co nam podklasy w takim zestawie skoro nadajnik będzie nadajnikiem z wyjściem tak czy inaczej
+//tym bardziej że przez dziedziczenie w taki sposób mamy nadal możliwość .getInput mimo że to blok czysto źródłowy.
+//potem sb szczerze cały projekt zrobię w sporej części od nowa z dokładniejszymi założeniami projektowymi...

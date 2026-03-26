@@ -2,39 +2,38 @@
 
 #include "cfunctionblock.h"
 #include "cconnection.h"
+#include "csingen.h"
+#include "cconstval.h"
 
 CFBDBuilder::CFBDBuilder(CContainerFBD* _cont) : FScheme(_cont) {}
 
-// TODO zaimplementować definiowanie konfiguracji z zewnętrznego pliku konfiguracyjnego. Pewnie json.
+// TODO zaimplementować definiowanie konfiguracji z zewnętrznego pliku json
 
 void CFBDBuilder::configureFBD() {
-    CFunctionBlock* fb1 = new CFunctionBlock("FB1", 0, 0.5, 0);
-    FScheme->addFunctionBlock( fb1 );
-    CFunctionBlock* fb2 = new CFunctionBlock("FB2", 0, 0.5, 0);
-    FScheme->addFunctionBlock( fb2 );
-    CFunctionBlock* fb3 = new CFunctionBlock("FB3", 2, 0, 0);
-    FScheme->addFunctionBlock( fb3 );
-    CFunctionBlock* fb4 = new CFunctionBlock("FB4", 2, 0, 0);
-    FScheme->addFunctionBlock( fb4 );
+    // Ustawienie czasu próbkowania w ms
+    FScheme->setSamplingTime(10);
 
-    CConnection *con;
-    con = new CConnection();
-    con->connectBegin( fb1->getOutput(1) );
-    con->connectEnd( fb3->getInput(1) );
-    FScheme->addConnection( con );
+    // sin(2π·f·t + φ)·A + O
+    CSinGen* sinGen = new CSinGen("SinGen1", 1, 1.0, 0.0, 0.0);
+    sinGen->setRoundingPrecision(6); // zaokrąglenie do 6 miejsc po przecinku
+    FScheme->addFunctionBlock(sinGen);
 
-    con = new CConnection();
-    con->connectBegin( fb2->getOutput(1) );
-    con->connectEnd( fb3->getInput(2) );
-    FScheme->addConnection( con );
+    // Generator stałej wartości do porównania
+    CConstVal* constGen = new CConstVal("ConstGen1", 0.0);
+    FScheme->addFunctionBlock(constGen);
 
-    con = new CConnection();
-    con->connectBegin( fb3->getOutput(1) );
-    con->connectEnd( fb4->getInput(1) );
-    FScheme->addConnection( con );
+    CFunctionBlock* sumBlock = new CFunctionBlock("Sum1", 2, 0.0, 0.0);
+    FScheme->addFunctionBlock(sumBlock);
 
-    con = new CConnection();
-    con->connectBegin( fb4->getOutput(1) );
-    con->connectEnd( fb4->getInput(2) );
-    FScheme->addConnection( con );
+    // Connect SinGen output to Sum input 1
+    CConnection* con1 = new CConnection();
+    con1->connectBegin(sinGen->getOutput(1));
+    con1->connectEnd(sumBlock->getInput(1));
+    FScheme->addConnection(con1);
+
+    // Connect ConstGen output to Sum input 2
+    CConnection* con2 = new CConnection();
+    con2->connectBegin(constGen->getOutput(1));
+    con2->connectEnd(sumBlock->getInput(2));
+    FScheme->addConnection(con2);
 }

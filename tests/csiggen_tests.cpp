@@ -3,7 +3,7 @@
 #include "cconstval.h"
 #include "cconnection.h"
 #include "cfromcsv.h"
-#include "cmathfunc.h"
+#include "csingen.h"
 #include "csiggen.h"
 #include "stimestamp.h"
 
@@ -67,13 +67,18 @@ TEST(CFromCSVTest, BazowyKonstruktorIWyjscie) {
     std::filesystem::remove(path);
 }
 
-TEST(CMathFuncTest, BazowyKonstruktorIWyjscie) {
-    CMathFunc block("M1", CMathFunc::EOperator::Add, 5.0);
+TEST(CSinGenTest, BazowyKonstruktorIWyjscie) {
+    CSinGen block("SG3", 1.0, 1.0, 0.0, 0.0);
+
+    EXPECT_DOUBLE_EQ(block.getFrequency(), 1.0);
+    EXPECT_DOUBLE_EQ(block.getAmplitude(), 1.0);
+    EXPECT_DOUBLE_EQ(block.getPhase(), 0.0);
+    EXPECT_DOUBLE_EQ(block.getOffset(), 0.0);
 
     block.setIsNadajnik(true);
+    block.initialize();
     block.calculate(makeTimestamp(0, 1));
 
-    // TODO: pełna logika
     auto out = block.getOutput(1)->getData();
-    (void)out;
+    EXPECT_TRUE(out.isOK());
 }

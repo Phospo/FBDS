@@ -52,6 +52,16 @@ void CSimEngine::simulateBatch() {
     FSimStatus = SimStatus::running;
     std::cout << "Simulation status: " << int(FSimStatus) << std::endl;
 
+    // Po inicjalizacji wykonaj jednokrotne obliczenie bloków na kroku 0 (t=0), aby wartość Sum1 już wtedy była aktualna.
+    if (FFBDScheme != nullptr) {
+        for (std::size_t index = 0; index < FFBDScheme->getFunctionBlockCount(); ++index) {
+            CFunctionBlock* block = FFBDScheme->getFunctionBlock(index);
+            if (block == nullptr)
+                continue;
+            block->calculate(FSimTS);
+        }
+    }
+
     if (monitoredBlock != nullptr && monitoredBlock->getOutput(1) != nullptr) {
         std::cout << "Simulation step: " << FSimStep
                   << ", " << monitoredBlock->getName()

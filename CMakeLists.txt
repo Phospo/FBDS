@@ -30,6 +30,7 @@ add_library(FBDSimulatorCore STATIC
     src/model/sdatasample.cpp
     src/model/stimestamp.cpp
     src/odbiornik/codbiornik.cpp
+    src/odbiornik/cwritetofile.cpp
     src/engine/csimulatorfbd.cpp
     src/engine/ccontainerfbd.cpp
     src/engine/csimengine.cpp
@@ -59,6 +60,7 @@ target_link_libraries(FBDSimulator PRIVATE
 add_executable(FBDSimulatorTests
     tests/cfunctionblock_tests.cpp
     tests/csiggen_tests.cpp
+    tests/odbiornik_tests.cpp
 )
 
 target_link_libraries(FBDSimulatorTests PRIVATE

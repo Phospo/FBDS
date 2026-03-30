@@ -21,3 +21,6 @@ void CFromCSV::initialize() {
 void CFromCSV::calculate(STimeStamp /*_ts*/) {
     // TODO: oj implementacja csv to będzie ból
 }
+
+// I nazewnictwo mi się nie podoba, wgl całe te wykresiki i nazewnictwo w pdfie to ciut nonsens w mojej opinii.
+// Spora część osób z tego co widziałem ma problem z samym rozczytaniem tych plików, mi to zajeło ładną chwilę i będąc szczerym się w tym gubię nadal.

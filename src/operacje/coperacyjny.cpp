@@ -30,6 +30,5 @@ void COperacyjny::setIsOdbiornik(bool _is_odbiornik) {
 }
 
 void COperacyjny::przelicz(STimeStamp _ts) {
-    // Placeholder: operacja przeliczana w klasie pochodnej
     (void)_ts;
 }

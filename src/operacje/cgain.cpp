@@ -5,6 +5,6 @@ CGain::CGain(std::string _name, unsigned _in_count, double _const, double _init_
 }
 
 void CGain::przelicz(STimeStamp _ts) {
-    // Placeholder: logika wzmacniania niezaimplementowana
+    // TODO
     (void)_ts;
 }

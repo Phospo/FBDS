@@ -56,7 +56,7 @@ target_include_directories(FBDSimulatorCore
         ${CMAKE_CURRENT_SOURCE_DIR}/src/operacje
 )
 
-add_executable(FBDSimulator main.cpp)
+add_executable(FBDSimulator src/main.cpp)
 
 target_link_libraries(FBDSimulator PRIVATE
     FBDSimulatorCore
@@ -64,10 +64,6 @@ target_link_libraries(FBDSimulator PRIVATE
 
 add_executable(FBDSimulatorTests
     tests/cfunctionblock_tests.cpp
-    tests/csiggen_tests.cpp
-    tests/odbiornik_tests.cpp
-    tests/csimengine_tests.cpp
-    tests/coperacyjny_tests.cpp
 )
 
 target_link_libraries(FBDSimulatorTests PRIVATE

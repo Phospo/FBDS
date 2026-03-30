@@ -35,6 +35,7 @@ public:
         @param _offset    Przesunięcie DC (domyślnie 0.0)
 
         Pamiętać o `sinGen->setRoundingPrecision(int);` 
+        Bo inaczej krzaczy się klasycznie precyzja
     */
     CSinGen(std::string _name, double _frequency = 1.0, double _amplitude = 1.0,
             double _phase = 0.0, double _offset = 0.0);

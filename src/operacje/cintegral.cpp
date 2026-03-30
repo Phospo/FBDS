@@ -5,6 +5,6 @@ CIntegral::CIntegral(std::string _name, unsigned _in_count, double _const, doubl
 }
 
 void CIntegral::przelicz(STimeStamp _ts) {
-    // Placeholder: logika całkowania niezaimplementowana
+    // TODO
     (void)_ts;
 }

@@ -5,6 +5,6 @@ CAddSub::CAddSub(std::string _name, unsigned _in_count, double _const, double _i
 }
 
 void CAddSub::przelicz(STimeStamp _ts) {
-    // Placeholder: logika dodawania/odejmowania niezaimplementowana
+    // TODO
     (void)_ts;
 }

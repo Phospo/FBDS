@@ -1,7 +1,10 @@
 #include "cwritetofile.h"
 #include <fstream>
 
-CWriteToFile::CWriteToFile(std::string _name, unsigned _in_count, double _const, double _init_out)
+CWriteToFile::CWriteToFile( std::string _name, 
+                            unsigned _in_count, 
+                            double _const, 
+                            double _init_out)
     : COdbiornik(std::move(_name), _in_count, _const, _init_out), FFilePath("") {
 }
 

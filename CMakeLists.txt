@@ -39,6 +39,10 @@ add_library(FBDSimulatorCore STATIC
     src/generator/cconstval.cpp
     src/generator/cfromcsv.cpp
     src/generator/csingen.cpp
+    src/operacje/coperacyjny.cpp
+    src/operacje/cgain.cpp
+    src/operacje/caddsub.cpp
+    src/operacje/cintegral.cpp
 )
 
 target_include_directories(FBDSimulatorCore
@@ -49,6 +53,7 @@ target_include_directories(FBDSimulatorCore
         ${CMAKE_CURRENT_SOURCE_DIR}/src/builder
         ${CMAKE_CURRENT_SOURCE_DIR}/src/generator
         ${CMAKE_CURRENT_SOURCE_DIR}/src/odbiornik
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/operacje
 )
 
 add_executable(FBDSimulator main.cpp)
@@ -62,6 +67,7 @@ add_executable(FBDSimulatorTests
     tests/csiggen_tests.cpp
     tests/odbiornik_tests.cpp
     tests/csimengine_tests.cpp
+    tests/coperacyjny_tests.cpp
 )
 
 target_link_libraries(FBDSimulatorTests PRIVATE
@@ -71,6 +77,7 @@ target_link_libraries(FBDSimulatorTests PRIVATE
 
 target_include_directories(FBDSimulatorTests PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/operacje
 )
 
 include(GoogleTest)

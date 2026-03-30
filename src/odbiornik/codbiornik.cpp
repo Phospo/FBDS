@@ -1,6 +1,9 @@
 #include "codbiornik.h"
 
-COdbiornik::COdbiornik(std::string _name, unsigned _in_count, double _const, double _init_out)
+COdbiornik::COdbiornik( std::string _name, 
+                        unsigned _in_count, 
+                        double _const, 
+                        double _init_out)
     : CFunctionBlock(_name, _in_count, _const, _init_out), FIsOdbiornik(true) {
 }
 

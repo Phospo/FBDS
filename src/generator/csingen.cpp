@@ -1,7 +1,10 @@
 #include "csingen.h"
 
-CSinGen::CSinGen(std::string _name, double _frequency, double _amplitude,
-                 double _phase, double _offset)
+CSinGen::CSinGen(   std::string _name, 
+                    double _frequency, 
+                    double _amplitude,
+                    double _phase, 
+                    double _offset)
     : CSigGen(std::move(_name), 0, 0.0, 0.0),
       FFrequency(_frequency), FAmplitude(_amplitude), FPhase(_phase), FOffset(_offset) {
 }

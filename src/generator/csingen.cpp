@@ -4,8 +4,6 @@ CSinGen::CSinGen(std::string _name, double _frequency, double _amplitude,
                  double _phase, double _offset)
     : CSigGen(std::move(_name), 0, 0.0, 0.0),
       FFrequency(_frequency), FAmplitude(_amplitude), FPhase(_phase), FOffset(_offset) {
-    // Wartość inicjalna dokładnie ustawiana w initialize(),
-    // ponieważ calculateSinValue() może użyć niezainicjalizowanych członków przed wykonaniem ciała konstruktora.
 }
 
 CSinGen::~CSinGen() = default;
@@ -53,8 +51,10 @@ void CSinGen::setRoundingPrecision(int _precision) {
 double CSinGen::calculateSinValue(double _timeSeconds) const {
     constexpr double PI2 = 2.0 * 3.141592653589793;
     return std::sin(PI2 * FFrequency * _timeSeconds + FPhase) * FAmplitude + FOffset;
+    //https://stackoverflow.com/questions/50366146/sine-wave-generation-in-c
 }
 
+//nie chce mi się bawić z std::setprecision potem
 double CSinGen::applyRounding(double _value) const {
     if (FRoundingPrecision < 0) {
         return _value;

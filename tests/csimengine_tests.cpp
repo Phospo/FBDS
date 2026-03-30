@@ -17,6 +17,7 @@ STimeStamp makeTimestamp(unsigned _seconds, unsigned _milliseconds) {
 
 } // namespace
 
+// Test sprawdza przepływ wartości z generatora do bloku sumującego w silniku symulacji.
 TEST(CSimEngineTest, GeneratorToSumWorkflow) {
     CContainerFBD container;
 
@@ -48,6 +49,7 @@ TEST(CSimEngineTest, GeneratorToSumWorkflow) {
     EXPECT_EQ(out.TimeStamp.Milliseconds, 0u);
 }
 
+// Test sprawdza, że brak połączenia wejściowego ustawia stan wyjścia jako błąd.
 TEST(CSimEngineTest, MissingInputMarksBadOutput) {
     CContainerFBD container;
 

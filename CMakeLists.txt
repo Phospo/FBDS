@@ -76,8 +76,9 @@ target_include_directories(FBDSimulatorTests PRIVATE
 include(GoogleTest)
 gtest_discover_tests(FBDSimulatorTests)
 
-include(GNUInstallDirs)
-install(TARGETS FBDSimulator
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-)
+# Usunięto instalację - nie jest potrzebna dla tej fazy projektu
+# include(GNUInstallDirs)
+# install(TARGETS FBDSimulator
+#    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+# )

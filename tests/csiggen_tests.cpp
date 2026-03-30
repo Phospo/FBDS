@@ -21,6 +21,7 @@ STimeStamp makeTimestamp(unsigned _seconds, unsigned _milliseconds) {
 
 } // namespace
 
+// Test sprawdza flagę nadajnika i podstawową propagację wyjścia dla bloku sygnału.
 TEST(CSigGenTest, NadajnikFlag) {
     CSigGen block("SG1", 0, 1.0, 0.0);
 
@@ -36,6 +37,7 @@ TEST(CSigGenTest, NadajnikFlag) {
     EXPECT_DOUBLE_EQ(output.Value, 1.0);
 }
 
+// Test sprawdza tworzenie bloku stałej wartości, dostęp do wartości i podstawowe obliczenia.
 TEST(CConstValTest, BazowyKonstruktorIWyjscie) {
     CConstVal block("CV1", 42.0);
 
@@ -49,6 +51,7 @@ TEST(CConstValTest, BazowyKonstruktorIWyjscie) {
     block.calculate(makeTimestamp(0, 0));
 }
 
+// Test sprawdza odczyt danych z CSV, inicjalizację i obliczenie bloku.
 TEST(CFromCSVTest, BazowyKonstruktorIWyjscie) {
     const std::filesystem::path path = std::filesystem::temp_directory_path() / "fbds_test_csv.csv";
     {
@@ -67,6 +70,7 @@ TEST(CFromCSVTest, BazowyKonstruktorIWyjscie) {
     std::filesystem::remove(path);
 }
 
+// Test sprawdza parametry generowanej sinusoidy i podstawowy wynik wyjściowy.
 TEST(CSinGenTest, BazowyKonstruktorIWyjscie) {
     CSinGen block("SG3", 1.0, 1.0, 0.0, 0.0);
 

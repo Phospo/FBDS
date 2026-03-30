@@ -6,6 +6,7 @@
 #include <filesystem>
 #include <fstream>
 
+// Test sprawdza zapis wyjścia do pliku skonfigurowanej ścieżki.
 TEST(CWriteToFileTest, WritesOutputToConfiguredFile) {
     const std::filesystem::path path = std::filesystem::temp_directory_path() / "fbds_write_to_file_test.csv";
     // Plik testowy jest tworzony w katalogu tymczasowym systemu, np. C:\Windows\Temp lub /tmp
@@ -31,6 +32,7 @@ TEST(CWriteToFileTest, WritesOutputToConfiguredFile) {
     std::filesystem::remove(path);
 }
 
+// Test sprawdza zapis wyjścia do podanej explicite ścieżki pliku.
 TEST(CWriteToFileTest, WritesOutputToExplicitPath) {
     const std::filesystem::path path = std::filesystem::temp_directory_path() / "fbds_write_to_file_test2.csv";
     // Plik testowy jest tworzony w katalogu tymczasowym systemu, np. C:\Windows\Temp lub /tmp

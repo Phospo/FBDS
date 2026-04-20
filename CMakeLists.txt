@@ -7,6 +7,19 @@ cmake_policy(SET CMP0135 NEW)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(QT_ROOT "" CACHE PATH "Qt installation prefix (contains lib/cmake/Qt6)")
+set(Qt6_DIR "" CACHE PATH "Path to Qt6Config.cmake directory")
+
+if(DEFINED QT_ROOT AND NOT QT_ROOT STREQUAL "")
+    list(PREPEND CMAKE_PREFIX_PATH "${QT_ROOT}")
+endif()
+
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core)
+
+qt_standard_project_setup()
+
+
+
 include(FetchContent)
 
 FetchContent_Declare(
@@ -60,7 +73,38 @@ add_executable(FBDSimulator src/main.cpp)
 
 target_link_libraries(FBDSimulator PRIVATE
     FBDSimulatorCore
+    Qt6::Core
 )
+
+if(WIN32)
+    get_target_property(QT_QMAKE_EXECUTABLE Qt6::qmake IMPORTED_LOCATION)
+    get_filename_component(QT_BIN_DIR "${QT_QMAKE_EXECUTABLE}" DIRECTORY)
+
+    add_custom_command(TARGET FBDSimulator POST_BUILD
+        COMMAND "${QT_BIN_DIR}/windeployqt.exe"
+                --no-translations
+                --no-system-d3d-compiler
+                --no-opengl-sw
+                "$<TARGET_FILE:FBDSimulator>"
+        COMMENT "Running windeployqt for FBDSimulator"
+        VERBATIM
+    )
+endif()
+
+include(GNUInstallDirs)
+
+install(TARGETS FBDSimulator
+    BUNDLE DESTINATION .
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+)
+
+qt_generate_deploy_app_script(
+    TARGET FBDSimulator
+    OUTPUT_SCRIPT deploy_script
+    NO_UNSUPPORTED_PLATFORM_ERROR
+)
+install(SCRIPT ${deploy_script})
 
 add_executable(FBDSimulatorTests
     tests/cfunctionblock_tests.cpp
@@ -78,10 +122,3 @@ target_include_directories(FBDSimulatorTests PRIVATE
 
 include(GoogleTest)
 gtest_discover_tests(FBDSimulatorTests)
-
-# Usunięto instalację - nie jest potrzebna dla tej fazy projektu
-# include(GNUInstallDirs)
-# install(TARGETS FBDSimulator
-#    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-#    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-# )

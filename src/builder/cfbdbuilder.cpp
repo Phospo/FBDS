@@ -8,6 +8,8 @@
 CFBDBuilder::CFBDBuilder(CContainerFBD* _cont) : FScheme(_cont) {}
 
 // TODO zaimplementować definiowanie konfiguracji z zewnętrznego pliku json
+// Najpierw zrobić wgl czytanie csv
+// Najpierw gui czy csv pytanie tylko.
 
 void CFBDBuilder::configureFBD() {
     // Ustawienie czasu próbkowania w ms
@@ -17,7 +19,7 @@ void CFBDBuilder::configureFBD() {
     sinGen->setRoundingPrecision(6); //
     FScheme->addFunctionBlock(sinGen);
 
-    CConstVal* constGen = new CConstVal("ConstGen1", 0.0);
+    CConstVal* constGen = new CConstVal("ConstGen1", 1.0);
     FScheme->addFunctionBlock(constGen);
 
     CFunctionBlock* sumBlock = new CFunctionBlock("Sum1", 2, 0.0, 0.0);

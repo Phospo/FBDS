@@ -14,7 +14,7 @@ if(DEFINED QT_ROOT AND NOT QT_ROOT STREQUAL "")
     list(PREPEND CMAKE_PREFIX_PATH "${QT_ROOT}")
 endif()
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core Gui Widgets)
 
 qt_standard_project_setup()
 
@@ -75,6 +75,8 @@ target_link_libraries(FBDSimulator PRIVATE
     FBDSimulatorCore
     Qt6::Core
 )
+
+add_subdirectory(src/frontend)
 
 if(WIN32)
     get_target_property(QT_QMAKE_EXECUTABLE Qt6::qmake IMPORTED_LOCATION)

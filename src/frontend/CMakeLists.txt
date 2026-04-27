@@ -1,14 +1,15 @@
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTORCC ON)
-
-add_executable(FBDSimulatorGUI
+qt_add_executable(FBDSimulatorGUI MANUAL_FINALIZATION
     main.cpp
     mainwindow.cpp
     simulatorbridge.cpp
+    views/canvaspanel.cpp
     views/fbdcanvasview.cpp
     views/propertypanel.cpp
     views/dashboardview.cpp
+    mainwindow.ui
+    views/canvaspanel.ui
+    views/propertypanel.ui
+    views/dashboardview.ui
 )
 
 target_include_directories(FBDSimulatorGUI
@@ -23,6 +24,8 @@ target_link_libraries(FBDSimulatorGUI PRIVATE
     Qt6::Gui
     Qt6::Widgets
 )
+
+qt_finalize_executable(FBDSimulatorGUI)
 
 if(WIN32)
     get_target_property(QT_QMAKE_EXECUTABLE Qt6::qmake IMPORTED_LOCATION)
@@ -44,10 +47,3 @@ install(TARGETS FBDSimulatorGUI
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
-
-qt_generate_deploy_app_script(
-    TARGET FBDSimulatorGUI
-    OUTPUT_SCRIPT deploy_gui_script
-    NO_UNSUPPORTED_PLATFORM_ERROR
-)
-install(SCRIPT ${deploy_gui_script})

@@ -1,25 +1,19 @@
 #include "propertypanel.h"
 
+#include "ui_propertypanel.h"
+
 #include <QHeaderView>
-#include <QLabel>
-#include <QTableWidget>
-#include <QVBoxLayout>
 
 PropertyPanel::PropertyPanel(QWidget* _parent)
-    : QWidget(_parent),
-      FLayout(new QVBoxLayout(this)),
-      FHeaderLabel(new QLabel("Wlasciwosci bloku", this)),
-      FPropertiesTable(new QTableWidget(this)) {
-    FPropertiesTable->setColumnCount(2);
-    FPropertiesTable->setHorizontalHeaderLabels({"Parametr", "Wartosc"});
-    FPropertiesTable->horizontalHeader()->setStretchLastSection(true);
+  : QWidget(_parent), FUi(std::make_unique<Ui::PropertyPanel>()) {
+  FUi->setupUi(this);
 
-    FLayout->addWidget(FHeaderLabel);
-    FLayout->addWidget(FPropertiesTable);
-    setLayout(FLayout);
+  FUi->propertiesTable->setColumnCount(2);
+  FUi->propertiesTable->setHorizontalHeaderLabels({"Parametr", "Wartosc"});
+  FUi->propertiesTable->horizontalHeader()->setStretchLastSection(true);
 }
 
 void PropertyPanel::resetState() {
-    FPropertiesTable->clearContents();
-    FPropertiesTable->setRowCount(0);
+  FUi->propertiesTable->clearContents();
+  FUi->propertiesTable->setRowCount(0);
 }

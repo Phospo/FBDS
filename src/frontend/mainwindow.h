@@ -1,12 +1,14 @@
 #pragma once
 
+#include <memory>
+
 #include <QMainWindow>
 
-class FBDCanvasView;
-class PropertyPanel;
-class DashboardView;
 class CSimulatorBridge;
-class QSplitter;
+
+namespace Ui {
+class MainWindow;
+}
 
 /** CMainWindow
 
@@ -16,30 +18,11 @@ class CMainWindow : public QMainWindow {
     Q_OBJECT
 
 private:
-    /** Główny podział przestrzeni roboczej okna. */
-    QSplitter* FMainSplitter{nullptr};
-
-    /** Widok schematu FBD. */
-    FBDCanvasView* FCanvasView{nullptr};
-
-    /** Panel właściwości zaznaczonego elementu. */
-    PropertyPanel* FPropertyPanel{nullptr};
-
-    /** Panel sterowania i podglądu wyników symulacji. */
-    DashboardView* FDashboardView{nullptr};
+    /** Interfejs wygenerowany z pliku .ui dla głównego okna. */
+    std::unique_ptr<Ui::MainWindow> FUi;
 
     /** Most łączący frontend z backendem symulatora. */
     CSimulatorBridge* FSimulatorBridge{nullptr};
-
-    /**
-        Budowa układu centralnego okna.
-    */
-    void setupCentralLayout();
-
-    /**
-        Budowa menu aplikacji.
-    */
-    void setupMenus();
 
 private slots:
     /**
@@ -69,4 +52,9 @@ public:
         @param _parent Rodzic obiektu Qt
     */
     explicit CMainWindow(QWidget* _parent = nullptr);
+    
+    /**
+        Destruktor domyślny.
+    */
+    ~CMainWindow() override;
 };

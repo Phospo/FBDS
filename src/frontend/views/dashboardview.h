@@ -1,11 +1,12 @@
 #pragma once
 
+#include <memory>
+
 #include <QWidget>
 
-class QLabel;
-class QPlainTextEdit;
-class QPushButton;
-class QVBoxLayout;
+namespace Ui {
+class DashboardView;
+}
 
 /** DashboardView
 
@@ -15,17 +16,14 @@ class DashboardView : public QWidget {
     Q_OBJECT
 
 private:
-    /** Układ panelu dashboard. */
-    QVBoxLayout* FLayout{nullptr};
+    /** Interfejs wygenerowany z pliku .ui. */
+    std::unique_ptr<Ui::DashboardView> FUi;
 
-    /** Etykieta nagłówka sekcji. */
-    QLabel* FHeaderLabel{nullptr};
-
-    /** Przycisk uruchomienia kroku symulacji. */
-    QPushButton* FRunStepButton{nullptr};
-
-    /** Pole logów statusowych frontendu. */
-    QPlainTextEdit* FLogView{nullptr};
+signals:
+    /**
+        Zgłoszenie żądania wykonania pojedynczego kroku symulacji.
+    */
+    void runStepRequested();
 
 public:
     /**

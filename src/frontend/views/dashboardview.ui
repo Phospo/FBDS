@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DashboardView</class>
+ <widget class="QWidget" name="DashboardView">
+  <property name="windowTitle">
+   <string>Dashboard symulacji</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="headerLabel">
+     <property name="text">
+      <string>Dashboard symulacji</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="runStepButton">
+     <property name="text">
+      <string>Wykonaj krok</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPlainTextEdit" name="logView">
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

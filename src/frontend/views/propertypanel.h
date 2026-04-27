@@ -1,10 +1,12 @@
 #pragma once
 
+#include <memory>
+
 #include <QWidget>
 
-class QLabel;
-class QTableWidget;
-class QVBoxLayout;
+namespace Ui {
+class PropertyPanel;
+}
 
 /** PropertyPanel
 
@@ -14,14 +16,8 @@ class PropertyPanel : public QWidget {
     Q_OBJECT
 
 private:
-    /** Kontener układu pionowego panelu. */
-    QVBoxLayout* FLayout{nullptr};
-
-    /** Etykieta nagłówkowa panelu. */
-    QLabel* FHeaderLabel{nullptr};
-
-    /** Tabela właściwości bloku. */
-    QTableWidget* FPropertiesTable{nullptr};
+    /** Interfejs wygenerowany z pliku .ui. */
+    std::unique_ptr<Ui::PropertyPanel> FUi;
 
 public:
     /**

@@ -1,24 +1,18 @@
 #include "dashboardview.h"
 
-#include <QLabel>
-#include <QPlainTextEdit>
+#include "ui_dashboardview.h"
+
 #include <QPushButton>
-#include <QVBoxLayout>
 
 DashboardView::DashboardView(QWidget* _parent)
-    : QWidget(_parent),
-      FLayout(new QVBoxLayout(this)),
-      FHeaderLabel(new QLabel("Dashboard symulacji", this)),
-      FRunStepButton(new QPushButton("Wykonaj krok", this)),
-      FLogView(new QPlainTextEdit(this)) {
-    FLogView->setReadOnly(true);
+    : QWidget(_parent), FUi(std::make_unique<Ui::DashboardView>()) {
+    FUi->setupUi(this);
 
-    FLayout->addWidget(FHeaderLabel);
-    FLayout->addWidget(FRunStepButton);
-    FLayout->addWidget(FLogView);
-    setLayout(FLayout);
+    connect(FUi->runStepButton, &QPushButton::clicked, this, [this]() {
+        emit runStepRequested();
+    });
 }
 
 void DashboardView::appendLog(const QString& _text) {
-    FLogView->appendPlainText(_text);
+    FUi->logView->appendPlainText(_text);
 }

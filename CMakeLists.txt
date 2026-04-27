@@ -8,7 +8,6 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(QT_ROOT "" CACHE PATH "Qt installation prefix (contains lib/cmake/Qt6)")
-set(Qt6_DIR "" CACHE PATH "Path to Qt6Config.cmake directory")
 
 if(DEFINED QT_ROOT AND NOT QT_ROOT STREQUAL "")
     list(PREPEND CMAKE_PREFIX_PATH "${QT_ROOT}")

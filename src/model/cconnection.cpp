@@ -16,6 +16,14 @@ void CConnection::connectEnd(CInput* _in) {
     }
 }
 
+COutput* CConnection::getBegin() const {
+    return FBegin;
+}
+
+CInput* CConnection::getEnd() const {
+    return FEnd;
+}
+
 SDataSample CConnection::getData() const {
     if (FBegin)
         return FBegin->getData();

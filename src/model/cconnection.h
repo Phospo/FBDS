@@ -30,6 +30,18 @@ class CConnection {
     */
     void connectEnd(CInput* _in);
     /**
+        Pobranie wyjścia źródłowego połączenia.
+
+        @return Wskaźnik do wyjścia źródłowego lub nullptr
+    */
+    COutput* getBegin() const;
+    /**
+        Pobranie wejścia docelowego połączenia.
+
+        @return Wskaźnik do wejścia docelowego lub nullptr
+    */
+    CInput* getEnd() const;
+    /**
         Pobranie danych przekazywanych przez połączenie.
 
         @return	Próbka danych

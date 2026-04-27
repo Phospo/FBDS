@@ -7,6 +7,10 @@ CInput::CInput(unsigned _number) {
         FNumber = _number;
 }
 
+unsigned CInput::getNumber() const {
+    return FNumber;
+}
+
 void CInput::addConnection(CConnection* _con) {
     if (_con)
         FConnection = _con;

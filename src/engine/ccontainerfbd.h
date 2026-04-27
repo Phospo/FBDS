@@ -62,6 +62,19 @@ public:
     */
     std::size_t getFunctionBlockCount() const;
     /**
+        Pobranie połączenia o zadanym indeksie.
+
+        @param _index Indeks połączenia w kolejności przechowywania
+        @return Wskaźnik do połączenia lub nullptr
+    */
+    CConnection* getConnection(std::size_t _index) const;
+    /**
+        Pobranie liczby połączeń w kontenerze.
+
+        @return Liczba połączeń
+    */
+    std::size_t getConnectionCount() const;
+    /**
         Pobranie czasu próbkowania symulacji.
 
         @return	Czas próbkowania w milisekundach
@@ -74,6 +87,10 @@ public:
         @param _samplingTime Czas próbkowania w milisekundach
     */
     void setSamplingTime(unsigned _samplingTime);
+    /**
+        Usunięcie całej konfiguracji schematu.
+    */
+    void clear();
 };
 
 #endif // CCONTAINERFBD_H

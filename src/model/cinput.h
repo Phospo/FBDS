@@ -26,6 +26,12 @@ class CInput {
     */
     CInput(unsigned _number);
     /**
+        Pobranie numeru wejścia.
+
+        @return Numer wejścia
+    */
+    unsigned getNumber() const;
+    /**
         Dodanie połączenia do wejścia
 
         @param	_con Wskaźnik do połączenia

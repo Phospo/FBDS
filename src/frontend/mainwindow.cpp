@@ -79,11 +79,17 @@ void CMainWindow::onOpenScheme() {
     FDashboardView->appendLog("Wybrano plik: " + path);
     statusBar()->showMessage("Wczytywanie: " + path);
 
-    QMessageBox::information(
-        this,
-        "Etap implementacji",
-        "Integracja z CFBDBuilder::loadFromJSON bedzie dodana w kolejnym kroku."
-    );
+    const bool loadOk = FSimulatorBridge->loadConfigurationFromJSON(path);
+    if (loadOk) {
+        FDashboardView->appendLog("Konfiguracja JSON zostala wczytana.");
+        statusBar()->showMessage("Wczytano konfiguracje JSON");
+        QMessageBox::information(this, "Wczytywanie", "Konfiguracja zostala poprawnie wczytana.");
+        return;
+    }
+
+    FDashboardView->appendLog("Blad wczytywania konfiguracji JSON.");
+    statusBar()->showMessage("Blad wczytywania JSON");
+    QMessageBox::warning(this, "Wczytywanie", "Nie udalo sie wczytac konfiguracji JSON.");
 }
 
 void CMainWindow::onSaveScheme() {
@@ -101,11 +107,17 @@ void CMainWindow::onSaveScheme() {
     FDashboardView->appendLog("Docelowy plik zapisu: " + path);
     statusBar()->showMessage("Zapisywanie: " + path);
 
-    QMessageBox::information(
-        this,
-        "Etap implementacji",
-        "Integracja z CFBDBuilder::saveToJSON bedzie dodana w kolejnym kroku."
-    );
+    const bool saveOk = FSimulatorBridge->saveConfigurationToJSON(path);
+    if (saveOk) {
+        FDashboardView->appendLog("Konfiguracja JSON zostala zapisana.");
+        statusBar()->showMessage("Zapisano konfiguracje JSON");
+        QMessageBox::information(this, "Zapisywanie", "Konfiguracja zostala poprawnie zapisana.");
+        return;
+    }
+
+    FDashboardView->appendLog("Blad zapisu konfiguracji JSON.");
+    statusBar()->showMessage("Blad zapisu JSON");
+    QMessageBox::warning(this, "Zapisywanie", "Nie udalo sie zapisac konfiguracji JSON.");
 }
 
 void CMainWindow::onRunSimulation() {

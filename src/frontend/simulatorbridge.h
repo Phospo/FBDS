@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QObject>
+#include <QString>
 
 class CSimulatorFBD;
 
@@ -34,4 +35,18 @@ public:
         @return true jeśli uruchomienie zakończyło się sukcesem
     */
     bool runDefaultSimulation();
+    /**
+        Wczytanie konfiguracji z pliku JSON.
+
+        @param _path Ścieżka do pliku JSON
+        @return true, jeśli konfiguracja została poprawnie wczytana
+    */
+    bool loadConfigurationFromJSON(const QString& _path);
+    /**
+        Zapisanie konfiguracji do pliku JSON.
+
+        @param _path Ścieżka do pliku JSON
+        @return true, jeśli konfiguracja została poprawnie zapisana
+    */
+    bool saveConfigurationToJSON(const QString& _path);
 };

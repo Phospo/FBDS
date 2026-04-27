@@ -19,6 +19,12 @@ class COutput {
     */
     COutput(unsigned _number);
     /**
+        Pobranie numeru wyjścia.
+
+        @return Numer wyjścia
+    */
+    unsigned getNumber() const;
+    /**
         Pobranie aktualnej wartości wyjścia.
 
         @return	Próbka danych

@@ -58,6 +58,11 @@ add_library(FBDSimulatorCore STATIC
     src/operacje/cintegral.cpp
 )
 
+target_link_libraries(FBDSimulatorCore
+    PUBLIC
+        Qt6::Core
+)
+
 target_include_directories(FBDSimulatorCore
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
@@ -110,6 +115,7 @@ install(SCRIPT ${deploy_script})
 
 add_executable(FBDSimulatorTests
     tests/cfunctionblock_tests.cpp
+    tests/cfbdbuilder_tests.cpp
 )
 
 target_link_libraries(FBDSimulatorTests PRIVATE

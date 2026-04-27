@@ -1,0 +1,55 @@
+{
+  "samplingTime": 10,
+  "simulationSteps": 100,
+  "blocks": [
+    {
+      "name": "SinGen1",
+      "type": "SinGen",
+      "params": {
+        "frequency": 1.0,
+        "amplitude": 1.0,
+        "phase": 0.0,
+        "offset": 0.0,
+        "roundingPrecision": 6
+      }
+    },
+    {
+      "name": "ConstGen1",
+      "type": "ConstVal",
+      "params": {
+        "value": 1.0
+      }
+    },
+    {
+      "name": "Sum1",
+      "type": "FunctionBlock",
+      "params": {
+        "inputCount": 2,
+        "constValue": 0.0,
+        "initialOutput": 0.0
+      }
+    }
+  ],
+  "connections": [
+    {
+      "from": {
+        "block": "SinGen1",
+        "output": 1
+      },
+      "to": {
+        "block": "Sum1",
+        "input": 1
+      }
+    },
+    {
+      "from": {
+        "block": "ConstGen1",
+        "output": 1
+      },
+      "to": {
+        "block": "Sum1",
+        "input": 2
+      }
+    }
+  ]
+}

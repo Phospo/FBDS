@@ -16,6 +16,22 @@ std::string CFunctionBlock::getName() const {
     return FName;
 }
 
+unsigned CFunctionBlock::getInputCount() const {
+    return static_cast<unsigned>(FInputs.size());
+}
+
+unsigned CFunctionBlock::getOutputCount() const {
+    return static_cast<unsigned>(FOutputs.size());
+}
+
+double CFunctionBlock::getConstValue() const {
+    return FConst;
+}
+
+double CFunctionBlock::getInitialOutputValue() const {
+    return FInitialOutput;
+}
+
 CInput* CFunctionBlock::getInput(unsigned _num) {
     if (_num == 0 || _num > FInputs.size())
         return nullptr;

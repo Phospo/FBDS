@@ -39,6 +39,30 @@ class CFunctionBlock {
     */
     std::string getName() const;
     /**
+        Pobranie liczby wejść bloku.
+
+        @return Liczba wejść
+    */
+    unsigned getInputCount() const;
+    /**
+        Pobranie liczby wyjść bloku.
+
+        @return Liczba wyjść
+    */
+    unsigned getOutputCount() const;
+    /**
+        Pobranie wartości stałej bloku.
+
+        @return Wartość stałej
+    */
+    double getConstValue() const;
+    /**
+        Pobranie wartości początkowej wyjścia.
+
+        @return Wartość początkowa wyjścia
+    */
+    double getInitialOutputValue() const;
+    /**
         Pobranie wskaźnika do wejścia o zadanym numerze.
 
         @param	_num	Numer wejścia

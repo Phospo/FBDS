@@ -5,10 +5,7 @@
 CContainerFBD::CContainerFBD() {}
 
 CContainerFBD::~CContainerFBD() {
-    for (auto connection : FConnections)
-        delete connection;
-    for (auto functionBlock : FFunctionBlocks)
-        delete functionBlock;
+    clear();
 }
 
 bool CContainerFBD::addFunctionBlock(CFunctionBlock* _block) {
@@ -54,10 +51,34 @@ std::size_t CContainerFBD::getFunctionBlockCount() const {
     return FFunctionBlocks.size();
 }
 
+CConnection* CContainerFBD::getConnection(std::size_t _index) const {
+    if (_index >= FConnections.size())
+        return nullptr;
+
+    auto it = FConnections.begin();
+    std::advance(it, static_cast<long>(_index));
+    return *it;
+}
+
+std::size_t CContainerFBD::getConnectionCount() const {
+    return FConnections.size();
+}
+
 unsigned CContainerFBD::getSamplingTime() const {
     return FSamplingTime;
 }
 
 void CContainerFBD::setSamplingTime(unsigned _samplingTime) {
     FSamplingTime = _samplingTime;
+}
+
+void CContainerFBD::clear() {
+    for (auto connection : FConnections)
+        delete connection;
+    FConnections.clear();
+
+    for (auto functionBlock : FFunctionBlocks)
+        delete functionBlock;
+    FFunctionBlocks.clear();
+    FFunctionBlocksByName.clear();
 }

@@ -5,6 +5,10 @@ COutput::COutput(unsigned _number) {
         FNumber = _number;
 }
 
+unsigned COutput::getNumber() const {
+    return FNumber;
+}
+
 SDataSample COutput::getData() const {
     return FValue;
 }

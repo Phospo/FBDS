@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1280</width>
-    <height>800</height>
+    <width>1284</width>
+    <height>808</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,11 +30,11 @@
     <item>
      <widget class="QSplitter" name="mainSplitter">
       <property name="orientation">
-       <enum>Qt::Horizontal</enum>
+       <enum>Qt::Orientation::Horizontal</enum>
       </property>
-        <widget class="CanvasPanel" name="canvasPanel"/>
-      <widget class="PropertyPanel" name="propertyPanel"/>
-      <widget class="DashboardView" name="dashboardView"/>
+      <widget class="CanvasPanel" name="canvasPanel" native="true"/>
+      <widget class="PropertyPanel" name="propertyPanel" native="true"/>
+      <widget class="DashboardView" name="dashboardView" native="true"/>
      </widget>
     </item>
    </layout>
@@ -44,8 +44,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1280</width>
-     <height>21</height>
+     <width>1284</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -101,9 +101,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-    <class>CanvasPanel</class>
-    <extends>QWidget</extends>
-    <header>views/canvaspanel.h</header>
+   <class>CanvasPanel</class>
+   <extends>QWidget</extends>
+   <header>views/canvaspanel.h</header>
   </customwidget>
   <customwidget>
    <class>PropertyPanel</class>

@@ -35,6 +35,13 @@ public:
         @return true jeśli uruchomienie zakończyło się sukcesem
     */
     bool runDefaultSimulation();
+
+    /**
+        Uruchomienie domyślnej symulacji backendu z przechwyceniem wyjścia tekstowego.
+
+        @return Zebrane wyjście z symulacji
+    */
+    QString runDefaultSimulationWithOutput();
     /**
         Wczytanie konfiguracji z pliku JSON.
 

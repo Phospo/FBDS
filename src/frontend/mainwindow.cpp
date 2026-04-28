@@ -14,9 +14,9 @@ CMainWindow::CMainWindow(QWidget* _parent)
     : QMainWindow(_parent), FUi(std::make_unique<Ui::MainWindow>()), FSimulatorBridge(new CSimulatorBridge(this)) {
     FUi->setupUi(this);
 
-    FUi->mainSplitter->setStretchFactor(0, 5);
+    FUi->mainSplitter->setStretchFactor(0, 1);
     FUi->mainSplitter->setStretchFactor(1, 2);
-    FUi->mainSplitter->setStretchFactor(2, 3);
+    FUi->mainSplitter->setStretchFactor(2, 2);
 
     connect(FUi->actionNewScheme, &QAction::triggered, this, &CMainWindow::onNewScheme);
     connect(FUi->actionOpenScheme, &QAction::triggered, this, &CMainWindow::onOpenScheme);
@@ -55,7 +55,7 @@ void CMainWindow::onOpenScheme() {
     if (loadOk) {
         FUi->dashboardView->appendLog("Konfiguracja JSON zostala wczytana.");
         statusBar()->showMessage("Wczytano konfiguracje JSON");
-        QMessageBox::information(this, "Wczytywanie", "Konfiguracja zostala poprawnie wczytana.");
+        // QMessageBox::information(this, "Wczytywanie", "Konfiguracja zostala poprawnie wczytana.");
         return;
     }
 
@@ -94,9 +94,13 @@ void CMainWindow::onSaveScheme() {
 
 void CMainWindow::onRunSimulation() {
     FUi->dashboardView->appendLog("Uruchamianie domyslnej symulacji backendu...");
-    const bool runOk = FSimulatorBridge->runDefaultSimulation();
+    const QString simulationOutput = FSimulatorBridge->runDefaultSimulationWithOutput();
+    const bool runOk = !simulationOutput.isNull();
 
     if (runOk) {
+        if (!simulationOutput.trimmed().isEmpty()) {
+            FUi->dashboardView->appendSimulationOutput(simulationOutput.trimmed());
+        }
         FUi->dashboardView->appendLog("Symulacja zakonczona.");
         statusBar()->showMessage("Symulacja zakonczona");
         return;

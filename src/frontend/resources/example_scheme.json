@@ -1,23 +1,23 @@
 {
   "samplingTime": 10,
-  "simulationSteps": 100,
+  "simulationSteps": 1000,
   "blocks": [
     {
       "name": "SinGen1",
       "type": "SinGen",
       "params": {
         "frequency": 1.0,
-        "amplitude": 1.0,
+        "amplitude": 2.0,
         "phase": 0.0,
         "offset": 0.0,
-        "roundingPrecision": 6
+        "roundingPrecision": 2
       }
     },
     {
       "name": "ConstGen1",
       "type": "ConstVal",
       "params": {
-        "value": 1.0
+        "value": 0.0
       }
     },
     {

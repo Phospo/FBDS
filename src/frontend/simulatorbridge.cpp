@@ -2,6 +2,9 @@
 
 #include "csimulatorfbd.h"
 
+#include <iostream>
+#include <sstream>
+
 CSimulatorBridge::CSimulatorBridge(QObject* _parent)
     : QObject(_parent), FSimulator(new CSimulatorFBD()) {}
 
@@ -17,6 +20,23 @@ bool CSimulatorBridge::runDefaultSimulation() {
 
     FSimulator->run();
     return true;
+}
+
+QString CSimulatorBridge::runDefaultSimulationWithOutput() {
+    if (FSimulator == nullptr) {
+        return {};
+    }
+
+    std::ostringstream capturedOutput;
+    std::streambuf* oldCoutBuffer = std::cout.rdbuf(capturedOutput.rdbuf());
+    std::streambuf* oldCerrBuffer = std::cerr.rdbuf(capturedOutput.rdbuf());
+
+    FSimulator->run();
+
+    std::cout.rdbuf(oldCoutBuffer);
+    std::cerr.rdbuf(oldCerrBuffer);
+
+    return QString::fromStdString(capturedOutput.str());
 }
 
 bool CSimulatorBridge::loadConfigurationFromJSON(const QString& _path) {

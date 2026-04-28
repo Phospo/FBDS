@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>DashboardView</class>
  <widget class="QWidget" name="DashboardView">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>320</width>
+    <height>420</height>
+   </rect>
+  </property>
   <property name="windowTitle">
    <string>Dashboard symulacji</string>
   </property>
@@ -16,14 +24,40 @@
    <item>
     <widget class="QPushButton" name="runStepButton">
      <property name="text">
-      <string>Wykonaj krok</string>
+      <string>Uruchom</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QPlainTextEdit" name="logView">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="readOnly">
       <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string>Log</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="simulationOutputLabel">
+     <property name="styleSheet">
+      <string notr="true">font-weight: 600;</string>
+     </property>
+     <property name="text">
+      <string>Wyjście symulacji</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPlainTextEdit" name="simulationOutputView">
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string>Symulacja</string>
      </property>
     </widget>
    </item>

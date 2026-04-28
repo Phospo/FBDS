@@ -39,4 +39,11 @@ public:
         @param _text Tekst komunikatu
     */
     void appendLog(const QString& _text);
+
+    /**
+        Dopisanie komunikatu do panelu wyjścia symulacji.
+
+        @param _text Tekst komunikatu
+    */
+    void appendSimulationOutput(const QString& _text);
 };

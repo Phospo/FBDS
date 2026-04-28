@@ -16,3 +16,7 @@ DashboardView::DashboardView(QWidget* _parent)
 void DashboardView::appendLog(const QString& _text) {
     FUi->logView->appendPlainText(_text);
 }
+
+void DashboardView::appendSimulationOutput(const QString& _text) {
+    FUi->simulationOutputView->appendPlainText(_text);
+}

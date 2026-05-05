@@ -273,19 +273,9 @@ FBDCanvasView::FBDCanvasView(QWidget* _parent)
 }
 
 void FBDCanvasView::clearScene() {
-    for (FBDConnectionItem* connection : qAsConst(FConnections)) {
-        FScene->removeItem(connection);
-        delete connection;
-    }
-    FConnections.clear();
-
-    for (FBDBlockItem* block : qAsConst(FBlocks)) {
-        FScene->removeItem(block);
-        delete block;
-    }
-    FBlocks.clear();
-
     FScene->clear();
+    FBlocks.clear();
+    FConnections.clear();
     clearPendingPort();
     emitCurrentSelection();
 }

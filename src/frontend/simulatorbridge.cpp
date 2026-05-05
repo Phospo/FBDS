@@ -2,6 +2,7 @@
 
 #include "csimulatorfbd.h"
 
+#include <QTemporaryFile>
 #include <iostream>
 #include <sstream>
 
@@ -45,6 +46,25 @@ bool CSimulatorBridge::loadConfigurationFromJSON(const QString& _path) {
     }
 
     return FSimulator->loadConfigurationFromJSON(_path.toStdString());
+}
+
+bool CSimulatorBridge::loadConfigurationFromJSONString(const QString& _json) {
+    if (FSimulator == nullptr) {
+        return false;
+    }
+
+    QTemporaryFile tempFile;
+    if (!tempFile.open()) {
+        return false;
+    }
+
+    const QByteArray jsonBytes = _json.toUtf8();
+    if (tempFile.write(jsonBytes) != jsonBytes.size()) {
+        return false;
+    }
+
+    tempFile.close();
+    return FSimulator->loadConfigurationFromJSON(tempFile.fileName().toStdString());
 }
 
 bool CSimulatorBridge::saveConfigurationToJSON(const QString& _path) {

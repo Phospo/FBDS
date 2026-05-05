@@ -49,6 +49,15 @@ public:
         @return true, jeśli konfiguracja została poprawnie wczytana
     */
     bool loadConfigurationFromJSON(const QString& _path);
+
+    /**
+        Wczytanie konfiguracji z tekstu JSON.
+
+        @param _json Tekst JSON
+        @return true, jeśli konfiguracja została poprawnie wczytana
+    */
+    bool loadConfigurationFromJSONString(const QString& _json);
+
     /**
         Zapisanie konfiguracji do pliku JSON.
 

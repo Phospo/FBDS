@@ -4,6 +4,8 @@
 
 #include <QMainWindow>
 
+#include "views/fbdcanvasview.h"
+
 class CSimulatorBridge;
 
 namespace Ui {
@@ -44,6 +46,31 @@ private slots:
         Uruchomienie symulacji.
     */
     void onRunSimulation();
+
+    /**
+        Utworzenie nowego bloku na scenie.
+    */
+    void onAddBlock();
+
+    /**
+        Włączenie trybu łączenia portów.
+    */
+    void onConnectBlocks();
+
+    /**
+        Usuwanie zaznaczonego bloku.
+    */
+    void onDeleteSelected();
+
+    /**
+        Zmiana właściwości zaznaczonego bloku.
+    */
+    void onPropertyValueChanged(const QString& propertyName, const QString& propertyValue);
+
+    /**
+        Aktualizacja panelu właściwości po wybraniu bloku.
+    */
+    void onBlockSelected(const FBDCanvasView::FBDBlockData& blockData);
 
 public:
     /**

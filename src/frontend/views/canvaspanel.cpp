@@ -6,6 +6,8 @@ CanvasPanel::CanvasPanel(QWidget* _parent)
     : QWidget(_parent), FUi(std::make_unique<Ui::CanvasPanel>()) {
     FUi->setupUi(this);
     connect(FUi->canvasView, &FBDCanvasView::blockSelected, this, &CanvasPanel::blockSelected);
+    connect(FUi->canvasView, &FBDCanvasView::addBlockRequested, this, &CanvasPanel::addBlockRequested);
+    connect(FUi->canvasView, &FBDCanvasView::deleteSelectedRequested, this, &CanvasPanel::deleteSelectedRequested);
 }
 
 CanvasPanel::~CanvasPanel() = default;
@@ -28,10 +30,6 @@ bool CanvasPanel::saveToJson(const QString& _path) const {
 
 QString CanvasPanel::exportToJson() const {
     return FUi->canvasView->exportToJson();
-}
-
-void CanvasPanel::setConnectMode(bool _enabled) {
-    FUi->canvasView->setConnectMode(_enabled);
 }
 
 void CanvasPanel::deleteSelectedBlock() {

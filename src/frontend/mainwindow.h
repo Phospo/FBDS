@@ -53,11 +53,6 @@ private slots:
     void onAddBlock();
 
     /**
-        Włączenie trybu łączenia portów.
-    */
-    void onConnectBlocks();
-
-    /**
         Usuwanie zaznaczonego bloku.
     */
     void onDeleteSelected();

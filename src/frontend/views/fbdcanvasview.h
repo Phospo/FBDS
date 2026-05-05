@@ -83,13 +83,6 @@ public:
     QString exportToJson() const;
 
     /**
-        Ustawienie trybu łączenia portów.
-
-        @param enabled true, aby włączyć tryb łączenia
-    */
-    void setConnectMode(bool enabled);
-
-    /**
         Usunięcie zaznaczonego bloku wraz z powiązanymi połączeniami.
     */
     void deleteSelected();
@@ -102,11 +95,24 @@ public:
     */
     void setSelectedBlockProperty(const QString& propertyName, const QString& propertyValue);
 
+protected:
+    void contextMenuEvent(QContextMenuEvent* event) override;
+
 signals:
     /**
         Zgłoszenie zmiany zaznaczonego bloku.
     */
     void blockSelected(const FBDBlockData& blockData);
+
+    /**
+        Żądanie dodania bloku z menu kontekstowego.
+    */
+    void addBlockRequested();
+
+    /**
+        Żądanie usunięcia zaznaczonego elementu.
+    */
+    void deleteSelectedRequested();
 
 private:
     class FBDBlockItem;
@@ -115,7 +121,6 @@ private:
     QGraphicsScene* FScene{nullptr};
     QList<FBDConnectionItem*> FConnections;
     QList<FBDBlockItem*> FBlocks;
-    bool FConnectMode{false};
 
     struct SPendingPort {
         FBDBlockItem* Block{nullptr};

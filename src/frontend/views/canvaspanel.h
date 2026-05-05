@@ -61,11 +61,6 @@ public:
     QString exportToJson() const;
 
     /**
-        Włączenie trybu łączenia portów.
-    */
-    void setConnectMode(bool _enabled);
-
-    /**
         Usunięcie zaznaczonego elementu.
     */
     void deleteSelectedBlock();
@@ -80,4 +75,14 @@ signals:
         Zmieniono zaznaczony blok w scenie.
     */
     void blockSelected(const FBDCanvasView::FBDBlockData& blockData);
+
+    /**
+        Żądanie dodania nowego bloku przez menu kontekstowe.
+    */
+    void addBlockRequested();
+
+    /**
+        Żądanie usunięcia zaznaczonego bloku przez menu kontekstowe.
+    */
+    void deleteSelectedRequested();
 };

@@ -1,5 +1,6 @@
 #include "fbdcanvasview.h"
 
+#include <QContextMenuEvent>
 #include <QFile>
 #include <QGraphicsObject>
 #include <QGraphicsPathItem>
@@ -9,6 +10,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QMenu>
 #include <QPainter>
 #include <QPainterPath>
 #include <QPen>
@@ -138,23 +140,34 @@ protected:
     }
 
     void mousePressEvent(QGraphicsSceneMouseEvent* event) override {
+        QGraphicsObject::mousePressEvent(event);
+    }
+
+    void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) override {
+        if (event->button() != Qt::LeftButton) {
+            QGraphicsObject::mouseDoubleClickEvent(event);
+            return;
+        }
+
         unsigned index = 0;
         if (FCanvas && FCanvas->isVisible()) {
             if (hitOutputPort(event->pos(), index)) {
                 if (FCanvas->scene()) {
                     FCanvas->handlePortClick(this, true, index);
+                    event->accept();
                     return;
                 }
             }
             if (hitInputPort(event->pos(), index)) {
                 if (FCanvas->scene()) {
                     FCanvas->handlePortClick(this, false, index);
+                    event->accept();
                     return;
                 }
             }
         }
 
-        QGraphicsObject::mousePressEvent(event);
+        QGraphicsObject::mouseDoubleClickEvent(event);
     }
 
     void hoverMoveEvent(QGraphicsSceneHoverEvent* event) override {
@@ -254,6 +267,7 @@ FBDCanvasView::FBDCanvasView(QWidget* _parent)
       FScene(new QGraphicsScene(this)) {
     setScene(FScene);
     setRenderHint(QPainter::Antialiasing, true);
+    setContextMenuPolicy(Qt::DefaultContextMenu);
     FScene->setSceneRect(0.0, 0.0, 1600.0, 900.0);
     connect(FScene, &QGraphicsScene::selectionChanged, this, &FBDCanvasView::onSceneSelectionChanged);
 }
@@ -471,11 +485,6 @@ QString FBDCanvasView::exportToJson() const {
     return QString::fromUtf8(QJsonDocument(root).toJson(QJsonDocument::Indented));
 }
 
-void FBDCanvasView::setConnectMode(bool enabled) {
-    FConnectMode = enabled;
-    clearPendingPort();
-}
-
 void FBDCanvasView::deleteSelected() {
     const QList<QGraphicsItem*> selectedItems = FScene->selectedItems();
     for (QGraphicsItem* item : selectedItems) {
@@ -555,10 +564,6 @@ FBDCanvasView::FBDBlockItem* FBDCanvasView::selectedBlockItem() const {
 }
 
 void FBDCanvasView::handlePortClick(FBDBlockItem* block, bool isOutput, unsigned index) {
-    if (!FConnectMode) {
-        return;
-    }
-
     if (FPendingPort.Block == nullptr) {
         FPendingPort.Block = block;
         FPendingPort.IsOutput = isOutput;
@@ -566,10 +571,9 @@ void FBDCanvasView::handlePortClick(FBDBlockItem* block, bool isOutput, unsigned
         return;
     }
 
-    if (FPendingPort.Block == block && FPendingPort.IsOutput == isOutput) {
-        FPendingPort.Block = block;
-        FPendingPort.IsOutput = isOutput;
-        FPendingPort.Index = index;
+    // Only create a connection between different port directions.
+    if (FPendingPort.IsOutput == isOutput) {
+        clearPendingPort();
         return;
     }
 
@@ -592,7 +596,19 @@ void FBDCanvasView::handlePortClick(FBDBlockItem* block, bool isOutput, unsigned
 
     createConnection(source, sourcePort, target, targetPort);
     clearPendingPort();
-    FConnectMode = false;
+}
+
+void FBDCanvasView::contextMenuEvent(QContextMenuEvent* event) {
+    QMenu menu;
+    QAction* addBlock = menu.addAction("Dodaj blok");
+    QAction* deleteSelected = menu.addAction("Usun zaznaczony");
+
+    const QAction* chosen = menu.exec(event->globalPos());
+    if (chosen == addBlock) {
+        emit addBlockRequested();
+    } else if (chosen == deleteSelected) {
+        emit deleteSelectedRequested();
+    }
 }
 
 void FBDCanvasView::emitCurrentSelection() {

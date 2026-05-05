@@ -26,20 +26,10 @@ CMainWindow::CMainWindow(QWidget* _parent)
     connect(FUi->actionSaveScheme, &QAction::triggered, this, &CMainWindow::onSaveScheme);
     connect(FUi->actionRunSimulation, &QAction::triggered, this, &CMainWindow::onRunSimulation);
     connect(FUi->dashboardView, &DashboardView::runStepRequested, this, &CMainWindow::onRunSimulation);
-
-    QAction* addBlockAction = new QAction("Dodaj blok", this);
-    QAction* connectBlocksAction = new QAction("Polacz bloki", this);
-    QAction* deleteAction = new QAction("Usun zaznaczony", this);
-    FUi->menuFile->addSeparator();
-    FUi->menuFile->addAction(addBlockAction);
-    FUi->menuFile->addAction(connectBlocksAction);
-    FUi->menuFile->addAction(deleteAction);
-
-    connect(addBlockAction, &QAction::triggered, this, &CMainWindow::onAddBlock);
-    connect(connectBlocksAction, &QAction::triggered, this, &CMainWindow::onConnectBlocks);
-    connect(deleteAction, &QAction::triggered, this, &CMainWindow::onDeleteSelected);
     connect(FUi->canvasPanel, &CanvasPanel::blockSelected, this, &CMainWindow::onBlockSelected);
     connect(FUi->propertyPanel, &PropertyPanel::propertyValueChanged, this, &CMainWindow::onPropertyValueChanged);
+    connect(FUi->canvasPanel, &CanvasPanel::addBlockRequested, this, &CMainWindow::onAddBlock);
+    connect(FUi->canvasPanel, &CanvasPanel::deleteSelectedRequested, this, &CMainWindow::onDeleteSelected);
 
     statusBar()->showMessage("Gotowy");
 }
@@ -148,11 +138,6 @@ void CMainWindow::onAddBlock() {
 
     FUi->canvasPanel->addBlock(data);
     statusBar()->showMessage("Dodano blok: " + data.Name);
-}
-
-void CMainWindow::onConnectBlocks() {
-    FUi->canvasPanel->setConnectMode(true);
-    statusBar()->showMessage("Tryb polaczenia: wybierz port wyjsciowy i port wejsciowy.");
 }
 
 void CMainWindow::onDeleteSelected() {
